@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "LMS_Prototype",
+            "group": "Enterprise",
+            "database": "LMS_Prototype",
+            "username": "postgres",
+            "password": "postgres"
+        }
+    ],
+    "typescript.autoClosingTags": false
+}
