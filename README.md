@@ -48,7 +48,7 @@ npm run dev
 cd Frontend
 npm run dev
 ```
-✅ Open http://localhost:5173
+✅ Open the url
 
 ### Step 4: Login with Demo Accounts
 Click any demo credential button on the login page!
