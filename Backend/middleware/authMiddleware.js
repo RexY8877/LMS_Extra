@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { getDemoUserById } = require('../data/demoData');
 
 const protect = async (req, res, next) => {
   let token;
@@ -13,9 +14,26 @@ const protect = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'defaultsecret');
 
-      req.user = await User.findByPk(decoded.id, {
-        attributes: { exclude: ['password'] },
-      });
+      // Check if this is a demo user first
+      if (decoded.id.startsWith('demo_')) {
+        const demoUser = getDemoUserById(decoded.id);
+        if (demoUser) {
+          req.user = {
+            id: demoUser._id,
+            name: demoUser.name,
+            email: demoUser.email,
+            role: demoUser.role,
+            college: demoUser.college,
+            department: demoUser.department,
+            isDemo: true,
+          };
+          next();
+          return;
+        }
+      }
+
+      // For non-demo users, use MongoDB
+      req.user = await User.findById(decoded.id).select('-password');
 
       next();
     } catch (error) {

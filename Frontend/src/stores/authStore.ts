@@ -40,7 +40,7 @@ export const useAuthStore = create<AuthState>()(
           if (response.ok) {
             const data = await response.json();
             // Map backend response to User interface
-            // Backend returns: _id, name, email, role, college, department, token
+            // Backend returns: _id, name, email, role, college, department, token, isDemo
             const user: User = {
               id: data._id,
               name: data.name,
@@ -49,6 +49,7 @@ export const useAuthStore = create<AuthState>()(
               college: data.college,
               department: data.department,
               token: data.token,
+              avatar: data.avatar,
             };
             set({ user, isAuthenticated: true });
             return true;

@@ -1,62 +1,49 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const User = sequelize.define('User', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const userSchema = new mongoose.Schema({
   name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   email: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
     unique: true,
-    validate: {
-      isEmail: true,
-    },
+    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email'],
   },
   password: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   role: {
-    type: DataTypes.ENUM('student', 'faculty', 'college_admin', 'super_admin'),
-    allowNull: false,
+    type: String,
+    enum: ['student', 'faculty', 'college_admin', 'super_admin'],
+    required: true,
   },
   college: {
-    type: DataTypes.STRING,
+    type: String,
   },
   department: {
-    type: DataTypes.STRING,
+    type: String,
   },
   avatar: {
-    type: DataTypes.STRING,
+    type: String,
   },
 }, {
   timestamps: true,
 });
 
-User.prototype.matchPassword = async function (enteredPassword) {
+userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-User.beforeCreate(async (user) => {
-  if (user.password) {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
   }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
-User.beforeUpdate(async (user) => {
-  if (user.changed('password')) {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
-  }
-});
-
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);

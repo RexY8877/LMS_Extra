@@ -2,8 +2,6 @@ const CodingProblem = require('../models/CodingProblem');
 const TestCase = require('../models/TestCase');
 const SolutionTemplate = require('../models/SolutionTemplate');
 const Submission = require('../models/Submission');
-const sequelize = require('../config/db');
-const { Op } = require('sequelize');
 
 // @desc    Get all problems with filtering and sorting
 // @route   GET /api/problems
@@ -12,56 +10,48 @@ exports.getProblems = async (req, res) => {
   try {
     const { difficulty, tags, search, sortBy } = req.query;
 
-    // Build where clause for filtering
-    const whereClause = {};
+    // Build filter object for MongoDB
+    const filter = {};
 
     // Filter by difficulty
     if (difficulty && difficulty !== 'All') {
-      whereClause.difficulty = difficulty;
+      filter.difficulty = difficulty;
     }
 
     // Filter by tags (problems with at least one matching tag)
     if (tags) {
       const tagArray = Array.isArray(tags) ? tags : [tags];
-      whereClause.tags = {
-        [Op.overlap]: tagArray
-      };
+      filter.tags = { $in: tagArray };
     }
 
     // Search by title
     if (search) {
-      whereClause.title = {
-        [Op.iLike]: `%${search}%`
-      };
+      filter.title = { $regex: search, $options: 'i' };
     }
 
-    // Build order clause for sorting
-    let orderClause = [['createdAt', 'DESC']]; // Default sort
+    // Build sort object for MongoDB
+    let sort = { createdAt: -1 }; // Default sort
 
     if (sortBy) {
       switch (sortBy) {
         case 'difficulty':
           // Custom order: Easy, Medium, Hard
-          orderClause = [
-            [sequelize.literal(`CASE difficulty WHEN 'Easy' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Hard' THEN 3 END`), 'ASC']
-          ];
+          sort = { difficulty: 1 };
           break;
         case 'acceptance':
-          orderClause = [['acceptance', 'DESC']];
+          sort = { acceptance: -1 };
           break;
         case 'title':
-          orderClause = [['title', 'ASC']];
+          sort = { title: 1 };
           break;
         default:
-          orderClause = [['createdAt', 'DESC']];
+          sort = { createdAt: -1 };
       }
     }
 
-    const problems = await CodingProblem.findAll({
-      where: whereClause,
-      order: orderClause,
-      attributes: ['id', 'title', 'difficulty', 'acceptance', 'tags', 'companies']
-    });
+    const problems = await CodingProblem.find(filter)
+      .sort(sort)
+      .select('_id title difficulty acceptance tags companies');
 
     res.json({ problems });
   } catch (error) {
@@ -77,21 +67,24 @@ exports.getProblemById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const problem = await CodingProblem.findByPk(id, {
-      include: [
-        {
-          model: TestCase,
-          where: { isExample: true },
-          required: false
-        }
-      ]
-    });
+    const problem = await CodingProblem.findById(id);
 
     if (!problem) {
       return res.status(404).json({ message: 'Problem not found' });
     }
 
-    res.json({ problem });
+    // Get example test cases
+    const exampleTestCases = await TestCase.find({ 
+      problemId: id, 
+      isExample: true 
+    });
+
+    res.json({ 
+      problem: {
+        ...problem.toObject(),
+        TestCases: exampleTestCases
+      }
+    });
   } catch (error) {
     console.error('Error fetching problem:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -111,17 +104,15 @@ exports.getProblemTemplate = async (req, res) => {
     }
 
     // Check if problem exists
-    const problem = await CodingProblem.findByPk(id);
+    const problem = await CodingProblem.findById(id);
     if (!problem) {
       return res.status(404).json({ message: 'Problem not found' });
     }
 
     // Try to find existing template
     let template = await SolutionTemplate.findOne({
-      where: {
-        problemId: id,
-        language: language
-      }
+      problemId: id,
+      language: language
     });
 
     // If no template exists, generate a default one
@@ -182,25 +173,18 @@ exports.getProblemStats = async (req, res) => {
     const { id } = req.params;
 
     // Check if problem exists
-    const problem = await CodingProblem.findByPk(id);
+    const problem = await CodingProblem.findById(id);
     if (!problem) {
       return res.status(404).json({ message: 'Problem not found' });
     }
 
     // Get all accepted submissions for this problem
-    const acceptedSubmissions = await Submission.findAll({
-      where: {
-        problemId: id,
-        status: 'Accepted',
-        runtime: {
-          [Op.not]: null
-        },
-        memory: {
-          [Op.not]: null
-        }
-      },
-      attributes: ['runtime', 'memory']
-    });
+    const acceptedSubmissions = await Submission.find({
+      problemId: id,
+      status: 'Accepted',
+      runtime: { $ne: null },
+      memory: { $ne: null }
+    }).select('runtime memory');
 
     // Calculate statistics
     if (acceptedSubmissions.length === 0) {

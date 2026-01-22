@@ -1,33 +1,27 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const mongoose = require('mongoose');
 
-const Leaderboard = sequelize.define('Leaderboard', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const leaderboardSchema = new mongoose.Schema({
   name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   college: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   score: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
   badges: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   avatar: {
-    type: DataTypes.STRING,
+    type: String,
   },
 }, {
   timestamps: true,
 });
 
-module.exports = Leaderboard;
+module.exports = mongoose.model('Leaderboard', leaderboardSchema);

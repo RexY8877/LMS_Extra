@@ -1,38 +1,25 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const CodingProblem = require('./CodingProblem');
+const mongoose = require('mongoose');
 
-const SolutionTemplate = sequelize.define('SolutionTemplate', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const solutionTemplateSchema = new mongoose.Schema({
   problemId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'CodingProblems',
-      key: 'id',
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CodingProblem',
+    required: true,
   },
   language: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   template: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   functionSignature: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
 }, {
   timestamps: true,
 });
 
-SolutionTemplate.belongsTo(CodingProblem, { foreignKey: 'problemId', targetKey: 'id' });
-CodingProblem.hasMany(SolutionTemplate, { foreignKey: 'problemId', sourceKey: 'id' });
-
-module.exports = SolutionTemplate;
+module.exports = mongoose.model('SolutionTemplate', solutionTemplateSchema);

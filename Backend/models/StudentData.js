@@ -1,41 +1,45 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const User = require('./User');
+const mongoose = require('mongoose');
 
-const StudentData = sequelize.define('StudentData', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
+const studentDataSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
-  skillReadiness: DataTypes.INTEGER,
-  codingProgress: DataTypes.INTEGER,
-  softSkillsProgress: DataTypes.INTEGER,
-  behavioralScore: DataTypes.INTEGER,
+  skillReadiness: {
+    type: Number,
+  },
+  codingProgress: {
+    type: Number,
+  },
+  softSkillsProgress: {
+    type: Number,
+  },
+  behavioralScore: {
+    type: Number,
+  },
   upcomingAssessments: {
-    type: DataTypes.JSONB, // Array of objects
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   recentActivities: {
-    type: DataTypes.JSONB, // Array of objects
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   aiRecommendations: {
-    type: DataTypes.JSONB, // Array of objects
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   skillBreakdown: {
-    type: DataTypes.JSONB, // Array of objects
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   weeklyProgress: {
-    type: DataTypes.JSONB, // Array of objects
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
 }, {
   timestamps: true,
 });
 
-StudentData.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
-
-module.exports = StudentData;
+module.exports = mongoose.model('StudentData', studentDataSchema);

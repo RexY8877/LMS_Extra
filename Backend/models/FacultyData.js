@@ -1,32 +1,56 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const User = require('./User');
+const mongoose = require('mongoose');
 
-const FacultyData = sequelize.define('FacultyData', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
+const facultyDataSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
-  pendingReviews: DataTypes.INTEGER,
-  activeBatches: DataTypes.INTEGER,
-  totalStudents: DataTypes.INTEGER,
+  pendingReviews: {
+    type: Number,
+    default: 0,
+  },
+  activeBatches: {
+    type: Number,
+    default: 0,
+  },
+  totalStudents: {
+    type: Number,
+    default: 0,
+  },
   upcomingSessions: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+    type: Number,
+    default: 0,
   },
-  recentSubmissions: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+  recentActivity: {
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
-  batchProgress: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+  alerts: {
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
+  },
+  coursesCreated: {
+    type: Number,
+    default: 0,
+  },
+  contentUploaded: {
+    type: Number,
+    default: 0,
+  },
+  assignmentsCreated: {
+    type: Number,
+    default: 0,
+  },
+  averageGradeGiven: {
+    type: Number,
+    default: 0,
+  },
+  lastLoginAt: {
+    type: Date,
   },
 }, {
   timestamps: true,
 });
 
-FacultyData.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
-
-module.exports = FacultyData;
+module.exports = mongoose.model('FacultyData', facultyDataSchema);

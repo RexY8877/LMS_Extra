@@ -36,3 +36,9 @@ build/
 temp/
 tmp/
 *.tmp
+
+# MongoDB database files
+Backend/data/db/
+*.lock
+*.wt
+WiredTiger*

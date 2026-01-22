@@ -192,7 +192,7 @@ An input string is valid if:
       { input: '(]', expectedOutput: 'false', isExample: true },
       { input: '([)]', expectedOutput: 'false', isExample: false },
       { input: '{[]}', expectedOutput: 'true', isExample: false },
-      { input: '', expectedOutput: 'true', isExample: false },
+      { input: '""', expectedOutput: 'true', isExample: false },
     ],
     templates: {
       python: {
@@ -444,7 +444,7 @@ A substring is a contiguous non-empty sequence of characters within a string.`,
       { input: 'abcabcbb', expectedOutput: '3', isExample: true },
       { input: 'bbbbb', expectedOutput: '1', isExample: true },
       { input: 'pwwkew', expectedOutput: '3', isExample: true },
-      { input: '', expectedOutput: '0', isExample: false },
+      { input: '""', expectedOutput: '0', isExample: false },
       { input: 'au', expectedOutput: '2', isExample: false },
       { input: 'dvdf', expectedOutput: '3', isExample: false },
     ],
@@ -1116,6 +1116,11 @@ const seedCodingProblems = async () => {
   try {
     console.log('Seeding coding problems...');
     
+    // Clear existing data
+    await CodingProblem.deleteMany({});
+    await TestCase.deleteMany({});
+    await SolutionTemplate.deleteMany({});
+    
     for (const problemData of codingProblemsData) {
       // Create the problem
       const problem = await CodingProblem.create({
@@ -1137,7 +1142,7 @@ const seedCodingProblems = async () => {
       // Create test cases
       for (const testCase of problemData.testCases) {
         await TestCase.create({
-          problemId: problem.id,
+          problemId: problem._id,
           input: testCase.input,
           expectedOutput: testCase.expectedOutput,
           isExample: testCase.isExample,
@@ -1150,7 +1155,7 @@ const seedCodingProblems = async () => {
       // Create solution templates
       for (const [language, templateData] of Object.entries(problemData.templates)) {
         await SolutionTemplate.create({
-          problemId: problem.id,
+          problemId: problem._id,
           language,
           template: templateData.template,
           functionSignature: templateData.functionSignature,

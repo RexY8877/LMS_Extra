@@ -1,42 +1,29 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const CodingProblem = require('./CodingProblem');
+const mongoose = require('mongoose');
 
-const TestCase = sequelize.define('TestCase', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const testCaseSchema = new mongoose.Schema({
   problemId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'CodingProblems',
-      key: 'id',
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CodingProblem',
+    required: true,
   },
   input: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   expectedOutput: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   isExample: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+    type: Boolean,
+    default: false,
   },
   weight: {
-    type: DataTypes.FLOAT,
-    defaultValue: 1.0,
+    type: Number,
+    default: 1.0,
   },
 }, {
   timestamps: true,
 });
 
-TestCase.belongsTo(CodingProblem, { foreignKey: 'problemId', targetKey: 'id' });
-CodingProblem.hasMany(TestCase, { foreignKey: 'problemId', sourceKey: 'id' });
-
-module.exports = TestCase;
+module.exports = mongoose.model('TestCase', testCaseSchema);

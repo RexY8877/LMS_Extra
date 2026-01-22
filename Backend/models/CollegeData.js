@@ -1,35 +1,37 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const mongoose = require('mongoose');
 
-const CollegeData = sequelize.define('CollegeData', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const collegeDataSchema = new mongoose.Schema({
   collegeName: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
     unique: true,
   },
-  totalStudents: DataTypes.INTEGER,
-  activeStudents: DataTypes.INTEGER,
-  placementReady: DataTypes.INTEGER,
-  averageScore: DataTypes.FLOAT,
+  totalStudents: {
+    type: Number,
+  },
+  activeStudents: {
+    type: Number,
+  },
+  placementReady: {
+    type: Number,
+  },
+  averageScore: {
+    type: Number,
+  },
   batchWiseData: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   skillHeatmap: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   highRiskStudents: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
 }, {
   timestamps: true,
 });
 
-module.exports = CollegeData;
+module.exports = mongoose.model('CollegeData', collegeDataSchema);

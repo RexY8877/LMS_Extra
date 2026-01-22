@@ -1,0 +1,938 @@
+# 🎓 LmSS - Learning Management System for Campus to Corporate Journey
+
+> **Transform Your Campus to Corporate Journey** - A comprehensive LMS platform with AI-driven analytics, coding practice, and personalized learning paths.
+
+## 📋 Table of Contents
+
+- [🚀 Quick Start (Demo Mode)](#-quick-start-demo-mode)
+- [🏗️ Project Overview](#️-project-overview)
+- [✅ Completed Features](#-completed-features)
+- [🔄 In Progress Features](#-in-progress-features)
+- [📋 Planned Features](#-planned-features)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📦 Installation & Setup](#-installation--setup)
+- [🔐 Demo Credentials](#-demo-credentials)
+- [🗄️ Database Configuration](#️-database-configuration)
+- [🚀 Production Deployment](#-production-deployment)
+- [🧪 Testing](#-testing)
+- [📁 Project Structure](#-project-structure)
+- [🤝 Contributing](#-contributing)
+
+## 🚀 Quick Start (Demo Mode)
+
+**Get started in 2 minutes without any database setup!**
+
+### Step 1: Clone & Install
+```bash
+git clone https://github.com/RexY8877/ascend-campus-to-career.git
+cd ascend-campus-to-career
+
+# Install backend dependencies
+cd Backend
+npm install
+
+# Install frontend dependencies
+cd ../Frontend
+npm install
+```
+
+### Step 2: Start Backend (Demo Mode)
+```bash
+cd Backend
+npm run dev
+```
+✅ You should see: `Running in DEMO MODE - MongoDB connection skipped`
+
+### Step 3: Start Frontend
+```bash
+cd Frontend
+npm run dev
+```
+✅ Open http://localhost:5173
+
+### Step 4: Login with Demo Accounts
+Click any demo credential button on the login page!
+
+## 🏗️ Project Overview
+
+**LmSS** is a comprehensive Learning Management System designed to bridge the gap between campus education and corporate readiness. It provides:
+
+- 🎯 **Multi-role Platform**: Students, Faculty, College Admins, Super Admins
+- 💻 **Coding Practice System**: LeetCode-style problem solving with Docker execution
+- 📚 **Course Management**: Upload PDFs, videos, create assignments
+- 📊 **Advanced Analytics**: AI-driven insights and progress tracking
+- 🏆 **Gamification**: Leaderboards, achievements, and competitive learning
+- 🎤 **Soft Skills Training**: Writing, reading, speaking assessments
+
+## ✅ Completed Features
+
+### 🔐 Authentication & User Management
+- ✅ Multi-role authentication (Student, Faculty, College Admin, Super Admin)
+- ✅ JWT-based secure authentication
+- ✅ Role-based access control
+- ✅ Demo mode with instant login (no database required)
+
+### 👨‍🎓 Student Dashboard
+- ✅ Comprehensive progress tracking
+- ✅ Skill breakdown (Coding, Writing, Reading, Speaking, Behavioral)
+- ✅ Weekly activity charts
+- ✅ AI recommendations
+- ✅ Upcoming assessments
+- ✅ Recent activities timeline
+- ✅ Quick action buttons
+
+### 💻 Coding Practice System (FULLY IMPLEMENTED)
+- ✅ **Problem Browser**: Filter by difficulty, tags, search
+- ✅ **Code Editor**: Monaco editor with syntax highlighting
+- ✅ **Multi-language Support**: Python, JavaScript, Java
+- ✅ **Code Execution**: Docker-based secure execution
+- ✅ **Test Case Validation**: Example and hidden test cases
+- ✅ **Submission System**: Full evaluation with metrics
+- ✅ **Progress Tracking**: Problems solved, acceptance rates
+- ✅ **Performance Metrics**: Runtime, memory usage, percentiles
+- ✅ **Submission History**: View past attempts and solutions
+- ✅ **Security**: Sandboxed execution, resource limits
+- ✅ **Property-based Testing**: 38 comprehensive test properties
+
+**📁 Implementation Status**: 
+- ✅ Backend API (19 endpoints)
+- ✅ Frontend Components (7 components)
+- ✅ Docker Execution Engine
+- ✅ Database Models & Migrations
+- ✅ Comprehensive Testing Suite
+
+### 👨‍🏫 Faculty Tools & Course Management (PARTIALLY IMPLEMENTED)
+- ✅ **Database Models**: Batch, Course, Module, Content, Assignment models
+- ✅ **File Storage**: PDF/Video upload with validation
+- ✅ **Content Processing**: PDF metadata extraction, video transcoding
+- ✅ **Security**: Malware scanning, signed URLs, encryption
+- ✅ **Content Versioning**: Up to 10 versions per content
+- ✅ **Faculty Dashboard**: Student monitoring, batch analytics
+
+**📁 Implementation Status**:
+- ✅ Database Models (11 models)
+- ✅ File Storage & Processing Services
+- ✅ Content Management APIs (partial)
+- 🔄 Frontend Components (in progress)
+- 📋 Assignment & Grading System (planned)
+- 📋 Analytics & Reporting (planned)
+
+### 🗄️ Database & Infrastructure
+- ✅ **Hybrid Architecture**: Demo mode (no DB) + Production mode (MongoDB)
+- ✅ **MongoDB Integration**: Full migration from PostgreSQL
+- ✅ **File Storage**: Local development, S3-ready for production
+- ✅ **Video Processing**: FFmpeg transcoding with Bull queue
+- ✅ **Security**: Malware scanning, file encryption
+
+## 🔄 In Progress Features
+
+### 👨‍🏫 Faculty Tools & Course Management
+**Current Task**: Implementing frontend components and API endpoints
+
+**Remaining Tasks** (31 total):
+- 🔄 **API Development** (Tasks 7-17): Dashboard, analytics, assignments
+- 📋 **Frontend Components** (Tasks 19-27): Course builder, content uploader
+- 📋 **Integration** (Tasks 28-31): Notifications, testing, seeding
+
+**Next Steps**:
+1. Complete faculty dashboard API endpoints
+2. Implement student analytics API
+3. Build batch management interface
+4. Create course builder component
+5. Implement content upload interface
+
+## 📋 Planned Features
+
+### 🏆 Assessment System
+**Status**: Specification needed
+- 📋 Automated coding assessments
+- 📋 Soft skills evaluations
+- 📋 Behavioral assessments
+- 📋 Timed examinations
+- 📋 Proctoring integration
+- 📋 Automated grading
+
+### 🏅 Leaderboard & Gamification
+**Status**: Specification needed
+- 📋 Global and batch-wise leaderboards
+- 📋 Achievement system
+- 📋 Badges and rewards
+- 📋 Streak tracking
+- 📋 Competitive challenges
+- 📋 Point-based progression
+
+### 📊 Admin Analytics
+**Status**: Specification needed
+- 📋 College-wide performance metrics
+- 📋 Placement tracking
+- 📋 Skill gap analysis
+- 📋 Predictive analytics
+- 📋 Custom reporting
+- 📋 Data visualization
+
+### 🎤 Soft Skills Modules
+**Status**: Specification needed
+- 📋 **Writing Practice**: Essay evaluation, grammar checking
+- 📋 **Reading Comprehension**: Passage analysis, speed reading
+- 📋 **Speaking Assessment**: Voice recording, pronunciation
+- 📋 **Communication Skills**: Presentation practice
+- 📋 **Interview Preparation**: Mock interviews, feedback
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Runtime**: Node.js with Express.js
+- **Database**: MongoDB (with Mongoose ODM)
+- **Authentication**: JWT tokens
+- **File Storage**: Local/AWS S3
+- **Video Processing**: FFmpeg with Bull queue
+- **Security**: ClamAV malware scanning
+- **Testing**: Jest + fast-check (property-based testing)
+
+### Frontend
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **UI Library**: shadcn/ui + Tailwind CSS
+- **State Management**: Zustand
+- **Code Editor**: Monaco Editor
+- **Charts**: Recharts
+- **Testing**: Vitest + Testing Library
+
+### Infrastructure
+- **Containerization**: Docker (for code execution)
+- **Queue**: Redis with Bull
+- **Development**: Nodemon, hot reload
+- **Production**: PM2, Nginx (recommended)
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- **Node.js** 18+ and npm
+- **Docker** (for coding practice system)
+- **Redis** (for video processing queue)
+- **MongoDB** (for production mode)
+- **FFmpeg** (for video processing)
+
+### Development Setup
+
+1. **Clone Repository**
+```bash
+git clone https://https://github.com/RexY8877/LMS_Extra.git
+cd ascend-campus-to-career
+```
+
+2. **Backend Setup**
+```bash
+cd Backend
+npm install
+
+# Copy environment file
+cp .env.example .env
+# Edit .env with your settings
+```
+
+3. **Frontend Setup**
+```bash
+cd Frontend
+npm install
+```
+
+4. **Start Development Servers**
+```bash
+# Terminal 1 - Backend
+cd Backend
+npm run dev
+
+# Terminal 2 - Frontend
+cd Frontend
+npm run dev
+```
+
+### Docker Setup (for Coding Practice)
+```bash
+# Build execution containers
+docker build -t lms-python ./Backend/docker/python
+docker build -t lms-javascript ./Backend/docker/javascript
+docker build -t lms-java ./Backend/docker/java
+```
+
+### Redis Setup (for Video Processing)
+```bash
+# Install Redis
+# Windows: Download from https://redis.io/download
+# macOS: brew install redis
+# Ubuntu: sudo apt install redis-server
+
+# Start Redis
+redis-server
+```
+
+## 🔐 Demo Credentials
+
+**Demo Mode** (No database required):
+
+| Role | Email | Password | Features |
+|------|-------|----------|----------|
+| 🎓 **Student** | `student@demo.com` | `demo123` | Dashboard, Coding Practice, Progress |
+| 👨‍🏫 **Faculty** | `faculty@demo.com` | `demo123` | Course Management, Student Monitoring |
+| 🏢 **College Admin** | `admin@demo.com` | `demo123` | College Analytics, Batch Management |
+| ⚡ **Super Admin** | `super@demo.com` | `demo123` | Platform Analytics, Multi-college View |
+
+**How to Use Demo Credentials**:
+1. Go to login page (http://localhost:5173)
+2. Click any demo credential button
+3. Or manually enter email/password
+
+## 🗄️ Database Configuration
+
+### Demo Mode (No Database)
+Perfect for development and testing:
+
+```env
+# Backend/.env
+DEMO_MODE=true
+JWT_SECRET=demo_jwt_secret_key
+PORT=5000
+```
+
+### Production Mode (MongoDB Required)
+
+#### Option 1: Local MongoDB
+```bash
+# Install MongoDB
+# Windows: Download from https://www.mongodb.com/try/download/community
+# macOS: brew install mongodb-community
+# Ubuntu: sudo apt install mongodb
+
+# Start MongoDB
+mongod
+
+# Update .env
+DEMO_MODE=false
+MONGODB_URI=mongodb://localhost:27017/lms_platform
+```
+
+#### Option 2: Cloud MongoDB (MongoDB Atlas)
+```env
+# Backend/.env
+DEMO_MODE=false
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/lms_platform
+JWT_SECRET=your_secure_jwt_secret
+```
+
+#### Initialize Database
+```bash
+cd Backend
+npm run db:setup  # Creates collections and seeds data
+```
+
+### Switching Between Modes
+
+**Demo → Production**:
+1. Set `DEMO_MODE=false` in `.env`
+2. Add `MONGODB_URI` to `.env`
+3. Run `npm run db:setup`
+4. Restart backend server
+
+**Production → Demo**:
+1. Set `DEMO_MODE=true` in `.env`
+2. Restart backend server
+
+## 🚀 Production Deployment
+
+### Environment Variables
+```env
+# Production .env
+NODE_ENV=production
+DEMO_MODE=false
+MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/lms_platform
+JWT_SECRET=your_super_secure_jwt_secret_here
+PORT=5000
+
+# File Storage (AWS S3)
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_REGION=us-east-1
+S3_BUCKET_NAME=lms-content-bucket
+
+# Email Service (for notifications)
+EMAIL_SERVICE=sendgrid
+SENDGRID_API_KEY=your_sendgrid_key
+FROM_EMAIL=noreply@yourdomain.com
+
+# Redis (for video processing)
+REDIS_URL=redis://localhost:6379
+```
+
+### Build & Deploy
+```bash
+# Build frontend
+cd Frontend
+npm run build
+
+# Start backend with PM2
+cd Backend
+npm install -g pm2
+pm2 start index.js --name "lms-backend"
+
+# Serve frontend with Nginx
+# Copy Frontend/dist to your web server
+```
+
+### Docker Deployment
+```bash
+# Build and run with Docker Compose
+docker-compose up -d
+```
+
+## 🧪 Testing
+
+### Backend Testing
+```bash
+cd Backend
+npm test                    # Run all tests
+npm run test:watch         # Watch mode
+```
+
+**Test Coverage**:
+- ✅ Unit tests for all services and controllers
+- ✅ Property-based tests (38 properties for coding system)
+- ✅ Integration tests for API endpoints
+- ✅ Mock database testing
+
+### Frontend Testing
+```bash
+cd Frontend
+npm test                    # Run all tests
+npm run test:watch         # Watch mode
+npm run test:ui            # Visual test runner
+```
+
+**Test Coverage**:
+- ✅ Component unit tests
+- ✅ User interaction tests
+- ✅ API integration tests
+- ✅ Property-based UI tests
+
+## 📁 Project Structure
+
+```
+ascend-campus-to-career/
+├── 📁 Backend/                 # Node.js API server
+│   ├── 📁 controllers/         # API route handlers
+│   ├── 📁 models/             # Database models (MongoDB)
+│   ├── 📁 services/           # Business logic services
+│   ├── 📁 middleware/         # Authentication, validation
+│   ├── 📁 routes/             # API route definitions
+│   ├── 📁 utils/              # Helper functions
+│   ├── 📁 data/               # Demo data and seeders
+│   ├── 📁 docker/             # Docker containers for code execution
+│   └── 📄 index.js            # Server entry point
+├── 📁 Frontend/               # React TypeScript app
+│   ├── 📁 src/
+│   │   ├── 📁 components/     # Reusable UI components
+│   │   ├── 📁 pages/          # Page components
+│   │   ├── 📁 services/       # API service layer
+│   │   ├── 📁 stores/         # State management (Zustand)
+│   │   └── 📁 utils/          # Helper functions
+│   └── 📄 index.html          # App entry point
+├── 📁 .kiro/                  # Feature specifications
+│   └── 📁 specs/              # Detailed feature specs
+│       ├── 📁 coding-practice-system/     # ✅ Complete
+│       └── 📁 faculty-tools-course-management/  # 🔄 In Progress
+├── 📄 README.md               # This file
+├── 📄 DEMO_SETUP_GUIDE.md     # Quick demo setup
+└── 📄 PRODUCTION_DEPLOYMENT_GUIDE.md  # Production deployment
+```
+
+### Key Directories
+
+**Backend Services**:
+- `services/executionService.js` - Docker-based code execution
+- `services/fileStorageService.js` - File upload/download
+- `services/videoProcessingService.js` - Video transcoding
+- `services/progressService.js` - Student progress tracking
+
+**Frontend Components**:
+- `components/coding/` - Coding practice interface (✅ Complete)
+- `components/dashboard/` - Role-based dashboards
+- `components/ui/` - Reusable UI components
+
+**Specifications**:
+- `.kiro/specs/coding-practice-system/` - Complete implementation spec
+- `.kiro/specs/faculty-tools-course-management/` - In-progress spec
+
+## 🤝 Contributing
+
+### Development Workflow
+
+1. **Pick a Feature**: Choose from planned features or in-progress tasks
+2. **Create Specification**: Use `.kiro/specs/` template for new features
+3. **Implement**: Follow the task-based approach in spec files
+4. **Test**: Write both unit and property-based tests
+5. **Document**: Update README and create setup guides
+
+### Current Priorities
+
+1. **Complete Faculty Tools** (31 tasks remaining)
+   - Start with: `.kiro/specs/faculty-tools-course-management/tasks.md`
+   - Focus on: API endpoints and frontend components
+
+2. **Create Assessment System Specification**
+   - Requirements gathering
+   - Design document
+   - Implementation tasks
+
+3. **Implement Leaderboard & Gamification**
+   - Competitive features
+   - Achievement system
+   - Progress gamification
+
+### Code Standards
+
+- **Backend**: CommonJS, Jest testing, JSDoc comments
+- **Frontend**: TypeScript, Vitest testing, TSDoc comments
+- **Database**: MongoDB with Mongoose, proper indexing
+- **API**: RESTful design, proper error handling
+- **Security**: Input validation, authentication, authorization
+
+### Getting Help
+
+- 📖 **Documentation**: Check existing spec files in `.kiro/specs/`
+- 🐛 **Issues**: Create GitHub issues for bugs
+- 💡 **Features**: Discuss new features in issues first
+- 📧 **Contact**: Reach out to maintainers
+
+---
+
+## 🎯 Next Steps
+
+### For Developers
+1. **Start with Demo Mode**: Get familiar with the platform
+2. **Complete Faculty Tools**: High-impact feature with clear tasks
+3. **Create New Specifications**: For assessment system and gamification
+4. **Enhance Existing Features**: Add more coding problems, improve UI
+
+### For Users
+1. **Try Demo Mode**: Experience all features without setup
+2. **Set up Production**: Use MongoDB for real data
+3. **Customize Content**: Add your own courses and problems
+4. **Scale Up**: Deploy to cloud infrastructure
+
+---
+
+**🚀 Ready to transform campus to corporate journey? Let's build the future of education together!**
+
+*Last Updated: January 2025*
+
+---
+
+## 📋 Detailed Implementation Processes for Planned Features
+
+### 🏆 Assessment System - Implementation Process
+
+**Status**: Specification needed → Design → Implementation (Estimated: 25-30 tasks)
+
+#### Phase 1: Requirements & Design
+1. **Requirements Gathering**
+   - Define assessment types (coding, MCQ, written, practical)
+   - Specify proctoring requirements
+   - Define grading and feedback systems
+   - Create user stories for students, faculty, admins
+
+2. **Design Architecture**
+   - Assessment engine design
+   - Question bank management
+   - Proctoring integration (webcam, screen recording)
+   - Auto-grading algorithms
+   - Report generation system
+
+3. **Database Design**
+   - Assessment model (questions, time limits, instructions)
+   - Attempt model (student responses, timestamps)
+   - Question model (type, difficulty, tags, correct answers)
+   - Result model (scores, feedback, analytics)
+
+#### Phase 2: Backend Implementation
+4. **Assessment Management API**
+   - Create/edit/delete assessments
+   - Question bank management
+   - Assessment scheduling
+   - Access control and permissions
+
+5. **Assessment Taking Engine**
+   - Secure assessment delivery
+   - Real-time answer saving
+   - Time tracking and auto-submission
+   - Anti-cheating measures
+
+6. **Auto-Grading System**
+   - MCQ auto-grading
+   - Coding problem evaluation (integrate with existing system)
+   - Plagiarism detection
+   - Manual grading interface for written answers
+
+7. **Proctoring Integration**
+   - Webcam monitoring
+   - Screen recording
+   - Browser lockdown
+   - Suspicious activity detection
+
+#### Phase 3: Frontend Implementation
+8. **Assessment Creation Interface**
+   - Question builder with rich text editor
+   - Assessment configuration (time, attempts, randomization)
+   - Preview and testing interface
+   - Question bank browser
+
+9. **Student Assessment Interface**
+   - Secure assessment taking environment
+   - Progress indicators and time warnings
+   - Answer review and submission
+   - Results and feedback display
+
+10. **Faculty Review Interface**
+    - Manual grading interface
+    - Bulk grading tools
+    - Analytics and reports
+    - Proctoring footage review
+
+#### Phase 4: Integration & Testing
+11. **Integration with Existing Systems**
+    - Link with student progress tracking
+    - Integrate with leaderboard system
+    - Connect with notification system
+    - Update dashboard analytics
+
+12. **Security & Performance Testing**
+    - Load testing for concurrent assessments
+    - Security penetration testing
+    - Browser compatibility testing
+    - Mobile responsiveness testing
+
+**Key Technologies Needed**:
+- WebRTC for proctoring
+- Socket.io for real-time features
+- PDF generation for reports
+- Image/video processing for proctoring analysis
+
+---
+
+### 🏅 Leaderboard & Gamification - Implementation Process
+
+**Status**: Specification needed → Design → Implementation (Estimated: 20-25 tasks)
+
+#### Phase 1: Requirements & Design
+1. **Gamification Strategy**
+   - Point system design (coding, assignments, participation)
+   - Achievement categories (streaks, milestones, competitions)
+   - Badge system with visual designs
+   - Leaderboard types (global, batch, skill-specific)
+
+2. **Engagement Mechanics**
+   - Daily/weekly challenges
+   - Competitive tournaments
+   - Team-based competitions
+   - Seasonal events and rewards
+
+3. **Database Design**
+   - Achievement model (name, description, criteria, icon)
+   - UserAchievement model (earned date, progress)
+   - Leaderboard model (type, timeframe, rankings)
+   - Challenge model (description, rules, rewards)
+
+#### Phase 2: Backend Implementation
+4. **Points & Scoring System**
+   - Point calculation algorithms
+   - Real-time score updates
+   - Historical point tracking
+   - Bonus point mechanisms
+
+5. **Achievement Engine**
+   - Achievement criteria evaluation
+   - Automatic achievement unlocking
+   - Progress tracking for multi-step achievements
+   - Notification system for new achievements
+
+6. **Leaderboard System**
+   - Real-time ranking calculations
+   - Multiple leaderboard types
+   - Historical leaderboard snapshots
+   - Filtering and search capabilities
+
+7. **Challenge System**
+   - Daily/weekly challenge generation
+   - Challenge participation tracking
+   - Reward distribution
+   - Challenge analytics
+
+#### Phase 3: Frontend Implementation
+8. **Leaderboard Interface**
+   - Interactive leaderboard displays
+   - Filtering and sorting options
+   - User profile integration
+   - Historical performance charts
+
+9. **Achievement Gallery**
+   - Achievement showcase
+   - Progress indicators
+   - Badge collection display
+   - Achievement sharing features
+
+10. **Gamification Dashboard**
+    - Personal progress overview
+    - Current challenges display
+    - Streak tracking
+    - Motivation and goal setting
+
+11. **Competition Interface**
+    - Tournament brackets
+    - Live competition updates
+    - Team formation and management
+    - Competition history
+
+#### Phase 4: Integration & Analytics
+12. **Analytics & Insights**
+    - Engagement metrics
+    - Achievement completion rates
+    - Leaderboard movement analysis
+    - Gamification effectiveness reports
+
+13. **Social Features**
+    - Friend systems
+    - Achievement sharing
+    - Challenge invitations
+    - Community competitions
+
+**Key Technologies Needed**:
+- WebSocket for real-time updates
+- Chart.js for progress visualization
+- Image processing for badge generation
+- Caching (Redis) for leaderboard performance
+
+---
+
+### 📊 Admin Analytics - Implementation Process
+
+**Status**: Specification needed → Design → Implementation (Estimated: 18-22 tasks)
+
+#### Phase 1: Requirements & Design
+1. **Analytics Requirements**
+   - College-wide performance metrics
+   - Placement tracking and outcomes
+   - Skill gap analysis
+   - Predictive analytics for at-risk students
+
+2. **Reporting Framework**
+   - Custom report builder
+   - Scheduled report generation
+   - Export formats (PDF, Excel, CSV)
+   - Dashboard customization
+
+3. **Data Architecture**
+   - Analytics data warehouse design
+   - ETL processes for data aggregation
+   - Real-time vs batch processing
+   - Data retention policies
+
+#### Phase 2: Backend Implementation
+4. **Data Collection & Processing**
+   - Event tracking system
+   - Data aggregation pipelines
+   - Performance metrics calculation
+   - Predictive model integration
+
+5. **Analytics API**
+   - College performance endpoints
+   - Student analytics API
+   - Faculty performance metrics
+   - Placement tracking API
+
+6. **Report Generation Engine**
+   - Custom report builder
+   - Template management
+   - Scheduled report generation
+   - Export functionality
+
+7. **Predictive Analytics**
+   - At-risk student identification
+   - Performance prediction models
+   - Skill gap analysis algorithms
+   - Placement probability calculations
+
+#### Phase 3: Frontend Implementation
+8. **Admin Dashboard**
+   - Executive summary dashboard
+   - Key performance indicators
+   - Interactive charts and graphs
+   - Drill-down capabilities
+
+9. **Analytics Workbench**
+   - Custom report builder interface
+   - Data visualization tools
+   - Filter and query interface
+   - Export and sharing features
+
+10. **Predictive Insights Interface**
+    - At-risk student alerts
+    - Intervention recommendations
+    - Trend analysis displays
+    - Forecasting visualizations
+
+#### Phase 4: Advanced Features
+11. **Advanced Analytics**
+    - Machine learning model integration
+    - A/B testing framework
+    - Cohort analysis tools
+    - Comparative analytics
+
+12. **Integration & Automation**
+    - Automated alert systems
+    - Integration with external systems
+    - API for third-party tools
+    - Data export automation
+
+**Key Technologies Needed**:
+- Apache Spark or similar for big data processing
+- Machine learning libraries (TensorFlow, scikit-learn)
+- Data visualization libraries (D3.js, Chart.js)
+- ETL tools for data processing
+
+---
+
+### 🎤 Soft Skills Modules - Implementation Process
+
+**Status**: Specification needed → Design → Implementation (Estimated: 30-35 tasks)
+
+#### Phase 1: Requirements & Design
+1. **Module Definition**
+   - Writing assessment criteria and rubrics
+   - Reading comprehension test formats
+   - Speaking evaluation parameters
+   - Communication skills framework
+
+2. **Assessment Design**
+   - Automated essay scoring algorithms
+   - Speech recognition and analysis
+   - Reading speed and comprehension tests
+   - Interview simulation scenarios
+
+3. **Content Architecture**
+   - Practice material database
+   - Assessment question banks
+   - Feedback templates
+   - Progress tracking metrics
+
+#### Phase 2: Writing Module
+4. **Writing Assessment Engine**
+   - Essay prompt management
+   - Automated grammar checking
+   - Plagiarism detection
+   - Style and coherence analysis
+
+5. **Writing Practice Interface**
+   - Rich text editor with suggestions
+   - Real-time grammar checking
+   - Word count and time tracking
+   - Revision history
+
+6. **Writing Analytics**
+   - Writing skill progression
+   - Common error analysis
+   - Improvement recommendations
+   - Comparative performance metrics
+
+#### Phase 3: Reading Module
+7. **Reading Comprehension System**
+   - Passage management system
+   - Question generation tools
+   - Speed reading exercises
+   - Comprehension scoring
+
+8. **Reading Practice Interface**
+   - Interactive reading environment
+   - Highlighting and note-taking
+   - Progress tracking
+   - Adaptive difficulty adjustment
+
+#### Phase 4: Speaking Module
+9. **Speech Recognition System**
+   - Audio recording and processing
+   - Pronunciation analysis
+   - Fluency assessment
+   - Accent evaluation
+
+10. **Speaking Practice Interface**
+    - Recording and playback functionality
+    - Real-time feedback display
+    - Practice scenario library
+    - Progress visualization
+
+11. **Interview Simulation**
+    - Mock interview scenarios
+    - AI-powered interview questions
+    - Performance evaluation
+    - Feedback and improvement tips
+
+#### Phase 5: Communication Skills
+12. **Presentation Skills**
+    - Video presentation recording
+    - Body language analysis
+    - Slide evaluation
+    - Audience engagement metrics
+
+13. **Group Communication**
+    - Team collaboration exercises
+    - Leadership assessment
+    - Conflict resolution scenarios
+    - Peer evaluation systems
+
+#### Phase 6: Integration & Advanced Features
+14. **Integrated Assessment**
+    - Multi-skill assessment combinations
+    - Holistic communication evaluation
+    - Industry-specific scenarios
+    - Certification pathways
+
+15. **AI-Powered Feedback**
+    - Natural language processing for feedback
+    - Personalized improvement plans
+    - Adaptive learning paths
+    - Intelligent tutoring system
+
+**Key Technologies Needed**:
+- Speech recognition APIs (Google Speech-to-Text, Azure Speech)
+- Natural language processing libraries
+- Video processing for presentation analysis
+- Machine learning for automated scoring
+- WebRTC for real-time communication features
+
+---
+
+## 🚀 Getting Started with New Features
+
+### For Feature Specification
+1. **Choose a Feature**: Pick from the processes above
+2. **Create Spec Directory**: `mkdir .kiro/specs/[feature-name]`
+3. **Write Requirements**: Follow EARS pattern from existing specs
+4. **Design Architecture**: Use existing design documents as templates
+5. **Create Task List**: Break down into 15-35 implementable tasks
+6. **Get Review**: Have specifications reviewed before implementation
+
+### For Implementation
+1. **Start with Spec**: Always begin with the specification document
+2. **Follow Task Order**: Implement tasks sequentially as designed
+3. **Test-Driven Development**: Write tests alongside implementation
+4. **Incremental Progress**: Complete one task fully before moving to next
+5. **Document Changes**: Update README and create setup guides
+
+### Estimation Guidelines
+- **Small Feature** (15-20 tasks): Manageable scope
+- **Medium Feature** (20-30 tasks): Moderate complexity  
+- **Large Feature** (30+ tasks): Comprehensive system
+
+*These estimates help with planning and resource allocation*
+
+---
+
+**🎯 Ready to build the next generation of educational technology? Pick a feature and start with the specification process!**

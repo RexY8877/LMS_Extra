@@ -1,29 +1,29 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const mongoose = require('mongoose');
 
-const PlatformData = sequelize.define('PlatformData', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
+const platformDataSchema = new mongoose.Schema({
+  totalColleges: {
+    type: Number,
   },
-  totalColleges: DataTypes.INTEGER,
-  totalStudents: DataTypes.INTEGER,
-  totalFaculty: DataTypes.INTEGER,
+  totalStudents: {
+    type: Number,
+  },
+  totalFaculty: {
+    type: Number,
+  },
   platformUsage: {
-    type: DataTypes.JSONB,
-    defaultValue: {},
+    type: mongoose.Schema.Types.Mixed,
+    default: {},
   },
   collegeComparison: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   growthMetrics: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
 }, {
   timestamps: true,
 });
 
-module.exports = PlatformData;
+module.exports = mongoose.model('PlatformData', platformDataSchema);

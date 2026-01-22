@@ -1,57 +1,54 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const mongoose = require('mongoose');
 
-const CodingProblem = sequelize.define('CodingProblem', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const codingProblemSchema = new mongoose.Schema({
   title: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   difficulty: {
-    type: DataTypes.ENUM('Easy', 'Medium', 'Hard'),
-    allowNull: false,
+    type: String,
+    enum: ['Easy', 'Medium', 'Hard'],
+    required: true,
   },
   description: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   constraints: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    defaultValue: [],
+    type: [String],
+    default: [],
   },
   examples: {
-    type: DataTypes.JSONB,
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
   hints: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    defaultValue: [],
+    type: [String],
+    default: [],
   },
   tags: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    defaultValue: [],
+    type: [String],
+    default: [],
   },
   companies: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
-    defaultValue: [],
+    type: [String],
+    default: [],
   },
-  acceptance: DataTypes.FLOAT,
+  acceptance: {
+    type: Number,
+  },
   timeLimit: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 2000,
+    type: Number,
+    required: true,
+    default: 2000,
   },
   memoryLimit: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 256,
+    type: Number,
+    required: true,
+    default: 256,
   },
 }, {
   timestamps: true,
 });
 
-module.exports = CodingProblem;
+module.exports = mongoose.model('CodingProblem', codingProblemSchema);

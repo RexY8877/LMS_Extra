@@ -1,71 +1,141 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const User = require('./User');
+const mongoose = require('mongoose');
 
-const StudentProgress = sequelize.define('StudentProgress', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const studentProgressSchema = new mongoose.Schema({
   userId: {
-    type: DataTypes.UUID,
-    allowNull: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
     unique: true,
-    references: {
-      model: 'Users',
-      key: 'id',
-    },
+  },
+  batchId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Batch',
   },
   totalSolved: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   easySolved: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   mediumSolved: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   hardSolved: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   totalSubmissions: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   acceptedSubmissions: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   acceptanceRate: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0.0,
+    type: Number,
+    default: 0.0,
   },
   solvedByTopic: {
-    type: DataTypes.JSONB,
-    defaultValue: {},
+    type: mongoose.Schema.Types.Mixed,
+    default: {},
   },
   dailyActivity: {
-    type: DataTypes.JSONB,
-    defaultValue: {},
+    type: mongoose.Schema.Types.Mixed,
+    default: {},
   },
   streak: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   lastSolvedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
+    type: Date,
+  },
+  // Faculty Tools extensions
+  overallProgress: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  codingProgress: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  writingProgress: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  readingProgress: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  speakingProgress: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  behavioralProgress: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  assignmentsCompleted: {
+    type: Number,
+    default: 0,
+  },
+  totalAssignments: {
+    type: Number,
+    default: 0,
+  },
+  averageGrade: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  lastActivityAt: {
+    type: Date,
+  },
+  performanceLevel: {
+    type: String,
+    enum: ['Excellent', 'Good', 'Needs Improvement', 'At Risk'],
+    default: 'Needs Improvement',
+  },
+  batchRank: {
+    type: Number,
+    min: 1,
+  },
+  attendanceRate: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  engagementScore: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
   },
 }, {
   timestamps: true,
 });
 
-StudentProgress.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
-User.hasOne(StudentProgress, { foreignKey: 'userId', sourceKey: 'id' });
+// Index for efficient queries
+studentProgressSchema.index({ batchId: 1, performanceLevel: 1 });
+studentProgressSchema.index({ batchId: 1, batchRank: 1 });
+studentProgressSchema.index({ userId: 1, batchId: 1 });
 
-module.exports = StudentProgress;
+module.exports = mongoose.model('StudentProgress', studentProgressSchema);

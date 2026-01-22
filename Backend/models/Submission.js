@@ -1,85 +1,62 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const User = require('./User');
-const CodingProblem = require('./CodingProblem');
+const mongoose = require('mongoose');
 
-const Submission = sequelize.define('Submission', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const submissionSchema = new mongoose.Schema({
   userId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'Users',
-      key: 'id',
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
   problemId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'CodingProblems',
-      key: 'id',
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CodingProblem',
+    required: true,
   },
   code: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   language: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   status: {
-    type: DataTypes.ENUM(
+    type: String,
+    enum: [
       'Accepted',
       'Wrong Answer',
       'Time Limit Exceeded',
       'Memory Limit Exceeded',
       'Runtime Error',
       'Compilation Error'
-    ),
-    allowNull: false,
+    ],
+    required: true,
   },
   runtime: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
+    type: Number,
   },
   memory: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
+    type: Number,
   },
   runtimePercentile: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
+    type: Number,
   },
   memoryPercentile: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
+    type: Number,
   },
   testsPassed: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
+    type: Number,
+    default: 0,
   },
   totalTests: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
   testResults: {
-    type: DataTypes.JSON,
-    allowNull: true,
-    defaultValue: [],
+    type: mongoose.Schema.Types.Mixed,
+    default: [],
   },
 }, {
   timestamps: true,
 });
 
-Submission.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
-Submission.belongsTo(CodingProblem, { foreignKey: 'problemId', targetKey: 'id' });
-User.hasMany(Submission, { foreignKey: 'userId', sourceKey: 'id' });
-CodingProblem.hasMany(Submission, { foreignKey: 'problemId', sourceKey: 'id' });
-
-module.exports = Submission;
+module.exports = mongoose.model('Submission', submissionSchema);
