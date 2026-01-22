@@ -913,7 +913,7 @@ ascend-campus-to-career/
 
 ### For Feature Specification
 1. **Choose a Feature**: Pick from the processes above
-2. **Create Spec Directory**: `mkdir .kiro/specs/[feature-name]`
+2. **See the Design.md and Tasks.md**
 3. **Write Requirements**: Follow EARS pattern from existing specs
 4. **Design Architecture**: Use existing design documents as templates
 5. **Create Task List**: Break down into 15-35 implementable tasks
