@@ -24,7 +24,7 @@
 
 ### Step 1: Clone & Install
 ```bash
-git clone https://github.com/RexY8877/ascend-campus-to-career.git
+git clone https://github.com/RexY8877/LMS_Extra.git
 cd ascend-campus-to-career
 
 # Install backend dependencies
