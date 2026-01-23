@@ -1,4 +1,4 @@
-# 🎓 LmSS - Learning Management System for Campus to Corporate Journey
+# 🎓 LmS - Learning Management System for Campus to Corporate Journey
 
 > **Transform Your Campus to Corporate Journey** - A comprehensive LMS platform with AI-driven analytics, coding practice, and personalized learning paths.
 
