@@ -1205,5 +1205,3 @@ ascend-campus-to-career/
 *These estimates help with planning and resource allocation*
 
 ---
-
-**🎯 Ready to build the next generation of educational technology? Pick a feature and start with the specification process!**
