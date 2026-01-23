@@ -474,6 +474,12 @@ redis-server
 ```
 
 ## 🔐 Demo Credentials
+##Make sure to run the following in the terminal:##
+cd Backend 
+>> cp .env.demo .env  # Use demo configuration
+>> npm install
+>> npm run demo:test  # Verify demo setup
+>> npm run dev        # Start server
 
 **Demo Mode** (No database required):
 
