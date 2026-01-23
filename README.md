@@ -496,7 +496,15 @@ npm run dev        # Start server
 | ⚡ **Super Admin** | `super@demo.com` | `demo123` | Platform Analytics, Multi-college View |
 
 **How to Use Demo Credentials**:
-1. Go to login page (http://localhost:5173)
+1. Go to login page
+   After:
+   
+   cd Frontend
+   
+   npm install
+   
+   npm run dev
+
 2. Click any demo credential button
 3. Or manually enter email/password
 
